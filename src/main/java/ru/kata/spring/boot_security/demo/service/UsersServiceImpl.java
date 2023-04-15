@@ -63,10 +63,12 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     @Transactional
     public void editUser(Users updateUser) {
 
-        if (!updateUser.getPassword().equals(getUserById(updateUser.getId()).getPassword())) {
+        if (userRepo.findByUsername(updateUser.getUsername()).getPassword().equals(updateUser.getPassword())) {
+            userRepo.save(updateUser);
+        } else {
             updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+            userRepo.save(updateUser);
         }
-        userRepo.save(updateUser);
     }
 
     @Override
@@ -76,7 +78,6 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername()
-                , user.getPassword(), user.getAuthorities());
+        return user;
     }
 }

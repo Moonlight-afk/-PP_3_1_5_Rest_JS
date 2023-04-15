@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>Домашняя</title>
 </head>
 <body>
-<a th:href="@{/login}">Login</a>
-<a th:href="@{/admin}">Admin</a>
-<a th:href="@{/user}">User</a>
+<div class="container mt-5 px-lg-5">
+    <div class="row align-items-center">
+        <a class="btn mt-2 btn-primary" href="/login" role="button">Вход</a>
+        <a class="btn mt-2 btn-primary" href="/admin" role="button">Панель администратора</a>
+        <a class="btn mt-2 btn-primary" href="/user" role="button">Панель пользователя</a>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
