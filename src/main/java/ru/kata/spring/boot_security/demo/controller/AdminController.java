@@ -1,23 +1,22 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.Users;
-import ru.kata.spring.boot_security.demo.service.RoleServiceImpl;
-import ru.kata.spring.boot_security.demo.service.UsersServiceImpl;
+import ru.kata.spring.boot_security.demo.service.RoleService;
+import ru.kata.spring.boot_security.demo.service.UsersService;
 
 import java.security.Principal;
 
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UsersServiceImpl userService;
-    private final RoleServiceImpl roleService;
+    private final UsersService userService;
+    private final RoleService roleService;
 
-    public AdminController(UsersServiceImpl userService, RoleServiceImpl roleService) {
+    public AdminController(UsersService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
