@@ -5,11 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.service.UsersService;
+import ru.kata.spring.boot_security.demo.service.UsersServiceImpl;
 
 import java.security.Principal;
 
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UsersController {
     private final UsersService usersService;

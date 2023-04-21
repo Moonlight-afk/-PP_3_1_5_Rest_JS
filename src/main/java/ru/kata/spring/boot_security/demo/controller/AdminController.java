@@ -1,21 +1,25 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.Users;
 import ru.kata.spring.boot_security.demo.service.RoleService;
+import ru.kata.spring.boot_security.demo.service.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.service.UsersService;
+import ru.kata.spring.boot_security.demo.service.UsersServiceImpl;
 
 import java.security.Principal;
 
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UsersService userService;
     private final RoleService roleService;
-
+    @Autowired
     public AdminController(UsersService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
