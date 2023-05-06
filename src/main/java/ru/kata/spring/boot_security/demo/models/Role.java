@@ -1,66 +1,85 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Objects;
-
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String role;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
 
-    public Role() {
-    }
+@Column(name = "authority")
+private String authority;
 
-    public Role(String role) {
-        this.role = role;
-    }
+@JsonIgnore
+@ManyToMany(mappedBy = "roles")
+    List<User> users;
 
-    public long getId() {
+public Role() {
+        }
+
+public Role(String authority) {
+        super();
+        this.authority = authority;
+        }
+
+public String getAuthority() {
+        return authority;
+        }
+
+public Long getId() {
         return id;
-    }
+        }
 
-    public void setId(long id) {
+public void setId(Long id) {
         this.id = id;
-    }
+        }
 
-    public String getRole() {
-        return role;
-    }
+public void setAuthority(String authority) {
+        this.authority = authority;
+        }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+public List<User> getUsers() {
+        return users;
+        }
 
-    @Override
-    public String getAuthority() {
-        return role;
-    }
+public void setUsers(List<User> users) {
+        this.users = users;
+        }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", role='" + role + '\''+
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
+@Override
+public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role1 = (Role) o;
-        return id.equals(role1.id) && role.equals(role1.role);
-    }
+        if (!(o instanceof Role)) return false;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getRole());
-    }
+        Role role = (Role) o;
+
+        if (getId() != null ? !getId().equals(role.getId()) : role.getId() != null) return false;
+        if (getAuthority() != null ? !getAuthority().equals(role.getAuthority()) : role.getAuthority() != null)
+        return false;
+        return getUsers() != null ? getUsers().equals(role.getUsers()) : role.getUsers() == null;
+        }
+
+@Override
+public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getAuthority() != null ? getAuthority().hashCode() : 0);
+        result = 31 * result + (getUsers() != null ? getUsers().hashCode() : 0);
+        return result;
+        }
+
+@Override
+public String toString() {
+        return "Role{" +
+        "id=" + id +
+        ", authority='" + authority + '\'' +
+        ", users=" + users +
+        '}';
+        }
 }
